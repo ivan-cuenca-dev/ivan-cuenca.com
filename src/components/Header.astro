@@ -1,0 +1,37 @@
+---
+import { nav } from '../config';
+---
+
+<header>
+  <div class="container" id="start">
+    <a href="/">
+      <img class="logo" src="/images/thumbnail.png" alt="thumbnail">
+    </a>
+
+    <button class="button" aria-label="Toggle navigation">
+      <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+
+    <nav class="nav" id="nav">
+      <ul class="ul">
+        {nav.map(item => (
+          <li class="li">
+            <a class="a" href={item.link}>{item.name}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const currentLocation = location.pathname;
+  const menuItems = document.querySelectorAll("nav a");
+  menuItems.forEach(item => {
+    if (item.getAttribute("href") === currentLocation) {
+      item.classList.add("active");
+    }
+  });
+</script>

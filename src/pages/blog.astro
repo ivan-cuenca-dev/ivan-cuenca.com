@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts');
+const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
+---
+
+<Base title="Blog">
+  <link rel="stylesheet" href="/css/blog.css">
+  <div class="blog-container">
+    <h1 class="title">Blog</h1>
+
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search posts..." class="search-input" />
+    </div>
+
+    <div class="tags-filter">
+      <button class="tag-btn active" data-tag="all">All</button>
+      {allTags.map(tag => (
+        <button class="tag-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+
+    <div class="blog" id="blog-grid">
+      {posts.map(post => (
+        <a class="post" href={`/blog/${post.slug}`} data-tags={(post.data.tags || []).join(',')}>
+          <img class="post-thumbnail" src={post.data.thumbnail} alt={post.data.title} />
+          <div class="post-excerpt">
+            <p class="post-title">{post.data.title}</p>
+            <p>{post.data.excerpt}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search') as HTMLInputElement;
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const posts = document.querySelectorAll('.post');
+    let activeTag = 'all';
+
+    function filterPosts() {
+      const query = searchInput.value.toLowerCase();
+      posts.forEach(post => {
+        const title = post.querySelector('.post-title')!.textContent!.toLowerCase();
+        const excerpt = post.querySelector('.post-excerpt p:not(.post-title)')!.textContent!.toLowerCase();
+        const tags = (post as HTMLElement).dataset.tags || '';
+        const matchesSearch = title.includes(query) || excerpt.includes(query);
+        const matchesTag = activeTag === 'all' || tags.split(',').includes(activeTag);
+        (post as HTMLElement).style.display = matchesSearch && matchesTag ? 'flex' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', filterPosts);
+
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tagButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTag = (btn as HTMLElement).dataset.tag || 'all';
+        filterPosts();
+      });
+    });
+  </script>
+</Base>

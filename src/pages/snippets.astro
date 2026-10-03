@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const snippets = await getCollection('snippets');
+const allTags = [...new Set(snippets.flatMap(s => s.data.tags))].sort();
+---
+
+<Base title="Snippets">
+  <link rel="stylesheet" href="/css/snippets.css">
+  <div class="snippets-container">
+    <h1 class="title">Snippets</h1>
+
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search snippets..." class="search-input" />
+    </div>
+
+    <div class="tags-filter">
+      <button class="tag-btn active" data-tag="all">All</button>
+      {allTags.map(tag => (
+        <button class="tag-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+
+    <div class="snippets-grid" id="snippets-grid">
+      {snippets.map(snippet => (
+        <a class="snippet-card" href={`/snippets/${snippet.slug}`} data-tags={snippet.data.tags.join(',')}>
+          <h2 class="snippet-title">{snippet.data.title}</h2>
+          <p class="snippet-description">{snippet.data.description}</p>
+          <div class="snippet-tags">
+            {snippet.data.tags.map(tag => (
+              <span class="snippet-tag">{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('search') as HTMLInputElement;
+    const tagButtons = document.querySelectorAll('.tag-btn');
+    const cards = document.querySelectorAll('.snippet-card');
+    let activeTag = 'all';
+
+    function filterSnippets() {
+      const query = searchInput.value.toLowerCase();
+      cards.forEach(card => {
+        const title = card.querySelector('.snippet-title')!.textContent!.toLowerCase();
+        const desc = card.querySelector('.snippet-description')!.textContent!.toLowerCase();
+        const tags = (card as HTMLElement).dataset.tags || '';
+        const matchesSearch = title.includes(query) || desc.includes(query);
+        const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+        (card as HTMLElement).style.display = matchesSearch && matchesTag ? 'flex' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', filterSnippets);
+
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tagButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeTag = (btn as HTMLElement).dataset.tag || 'all';
+        filterSnippets();
+      });
+    });
+  </script>
+</Base>

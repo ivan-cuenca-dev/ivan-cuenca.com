@@ -1,0 +1,37 @@
+/* INDEX PAGE */
+.demo_reel {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.demo_reel video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    display: block;
+}
+
+.description {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgb(var(--text-secondary));
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .demo_reel {
+        border-radius: 12px;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+}

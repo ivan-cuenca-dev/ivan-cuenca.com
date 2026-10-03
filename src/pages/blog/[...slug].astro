@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Base title={post.data.title}>
+  <link rel="stylesheet" href="/css/blog.css">
+  <article class="post-full">
+    <h1 class="title">{post.data.title}</h1>
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="post-tags-detail">
+        {post.data.tags.map(tag => (
+          <span class="post-tag">{tag}</span>
+        ))}
+      </div>
+    )}
+    <Content />
+    {post.data.download && (
+      <a class="download-button" href={post.data.download} target="_blank" rel="noopener noreferrer">Download</a>
+    )}
+    <p class="date">{post.data.author} - {post.data.date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}</p>
+  </article>
+</Base>

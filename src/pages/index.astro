@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+
+<Base title={site.title} description={site.description}>
+  <link rel="stylesheet" href="/css/index.css">
+  <div class="demo_reel">
+    <video allow="fullscreen" frameBorder="0" disablePictureInPicture controls controlsList="noplaybackrate nodownload">
+      <source src={site.reel} type="video/mp4">
+    </video>
+  </div>
+  <a class="description">{site.description}</a>
+</Base>

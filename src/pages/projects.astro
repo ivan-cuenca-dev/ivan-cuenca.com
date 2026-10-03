@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => b.data.year - a.data.year);
+---
+
+<Base title="Projects">
+  <link rel="stylesheet" href="/css/projects.css">
+  <div class="projects">
+    {projects.map(project => (
+      <div class="card">
+        <a href={project.data.link} target="_blank" rel="noopener noreferrer">
+          <img src={project.data.thumbnail} alt={project.data.title} style={project.data.image_position ? `object-position: ${project.data.image_position}` : ''} />
+        </a>
+        <div class="project-info">
+          <a class="title-year"><b>{project.data.title} ({project.data.year})</b></a>
+          <a>{project.data.company}</a>
+        </div>
+      </div>
+    ))}
+  </div>
+</Base>

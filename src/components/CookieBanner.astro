@@ -1,0 +1,38 @@
+---
+---
+
+<section class="cookies" id="cookies-banner">
+  <h2 class="cookies-title">Cookies</h2>
+  <p class="cookies-text">
+    I use Google Analytics to collect anonymous data on website interactions.<br>
+    This helps me to identify popular content and create more of what you like.
+  </p>
+  <div class="cookies-buttons">
+    <button class="cookies-button cookies-button-yes" id="cookies-accept">accept</button>
+    <button class="cookies-button cookies-button-no" id="cookies-deny">Deny</button>
+  </div>
+</section>
+
+<script>
+  const cookiesFrame = document.getElementById('cookies-banner')!;
+  const cookiesAcceptButton = document.getElementById('cookies-accept')!;
+  const cookiesDenyButton = document.getElementById('cookies-deny')!;
+
+  if (!localStorage.getItem('cookies')) {
+    cookiesFrame.classList.add('active');
+  }
+
+  cookiesAcceptButton.addEventListener('click', () => {
+    cookiesFrame.classList.remove('active');
+    localStorage.setItem('cookies', 'true');
+  });
+
+  cookiesDenyButton.addEventListener('click', () => {
+    cookiesFrame.classList.remove('active');
+    localStorage.setItem('cookies', 'false');
+  });
+
+  if (localStorage.getItem('cookies') === 'true') {
+    gtag('consent', 'update', {'analytics_storage': 'granted'});
+  }
+</script>

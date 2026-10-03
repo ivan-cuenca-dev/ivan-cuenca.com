@@ -1,0 +1,17 @@
+---
+import { social, site } from '../config';
+---
+
+<footer>
+  <div class="container">
+    <div class="social">
+      {social.map(item => (
+        <a href={item.link} target="_blank" rel="noopener noreferrer">
+          <i class={item.icon}></i>
+        </a>
+      ))}
+    </div>
+
+    <p set:html={site.footerCopy}></p>
+  </div>
+</footer>

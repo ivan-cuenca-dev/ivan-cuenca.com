@@ -1,0 +1,236 @@
+/* SNIPPETS PAGE */
+.snippets-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.search-bar {
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+    border: 1px solid rgb(var(--border) / 0.1);
+    border-radius: 12px;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--text-primary));
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+    border-color: rgb(var(--accent-color));
+    box-shadow: 0 0 0 3px rgb(var(--accent-color) / 0.1);
+}
+
+.search-input::placeholder {
+    color: rgb(var(--text-secondary) / 0.5);
+}
+
+.tags-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tag-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border: none;
+    border-radius: 9999px;
+    background: transparent;
+    color: rgb(var(--text-secondary));
+    cursor: pointer;
+    transition: color 0.15s, background-color 0.15s;
+}
+
+.tag-btn:hover {
+    color: rgb(var(--text-primary));
+    background: rgb(var(--text-primary) / 0.05);
+}
+
+.tag-btn.active {
+    color: rgb(var(--accent-color));
+    background: rgb(var(--accent-color) / 0.1);
+}
+
+.snippets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.snippet-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgb(var(--border) / 0.08);
+    background-color: rgb(var(--surface));
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.snippet-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgb(var(--accent-color) / 0.3);
+}
+
+.snippet-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: rgb(var(--text-primary));
+}
+
+.snippet-description {
+    font-size: 0.9rem;
+    color: rgb(var(--text-secondary));
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex: 1;
+}
+
+.snippet-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.snippet-tag {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    background-color: rgb(var(--accent-color) / 0.1);
+    color: rgb(var(--accent-color));
+}
+
+/* SNIPPET DETAIL PAGE */
+.snippet-detail {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.snippet-detail .snippet-description {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.snippet-detail .snippet-tags {
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.snippet-content {
+    line-height: 1.8;
+    color: rgb(var(--text-primary));
+}
+
+.snippet-content h1,
+.snippet-content h2,
+.snippet-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: rgb(var(--text-primary));
+}
+
+.snippet-content p {
+    margin-bottom: 1rem;
+}
+
+.snippet-content ul,
+.snippet-content ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+}
+
+.snippet-content li {
+    margin-bottom: 0.5rem;
+}
+
+.snippet-content a {
+    color: rgb(var(--accent-color));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s;
+}
+
+.snippet-content a:hover {
+    color: rgb(var(--accent-hover));
+}
+
+.snippet-content code {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.9em;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    background-color: rgb(var(--accent-color) / 0.15);
+    border-radius: 6px;
+    color: rgb(var(--accent-hover));
+    border: 1px solid rgb(var(--accent-color) / 0.2);
+}
+
+.snippet-content pre {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    background-color: #1e1e2e;
+    border-radius: 12px;
+    border: 1px solid #313244;
+    color: #cdd6f4;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.snippet-content pre code {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.snippet-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.snippet-content th,
+.snippet-content td {
+    padding: 0.75rem;
+    border: 1px solid rgb(var(--border) / 0.1);
+    text-align: left;
+}
+
+.snippet-content th {
+    background-color: rgb(var(--text-primary) / 0.05);
+    font-weight: 600;
+}
+
+.snippet-content hr {
+    border: none;
+    height: 1px;
+    background-color: rgb(var(--border) / 0.1);
+    margin: 2rem 0;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .snippets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tags-filter {
+        justify-content: center;
+    }
+}
