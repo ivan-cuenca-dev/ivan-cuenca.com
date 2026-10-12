@@ -13,7 +13,7 @@ excerpt: How to use a quadratic spline interpolation for a blendshape.
 
 download: https://ivancuencarigging.gumroad.com/l/NonLinearBlendshape
 
-tags: [bifrost]
+tags: [Bifrost]
 ---
 
 ![non linear blendshape gif](/images/posts/bifrostNonLinearBlendshape/example_01.gif)

@@ -13,7 +13,7 @@ excerpt: How to create a pose reader applying the barycentric coordinate system.
 
 download: https://ivancuencarigging.gumroad.com/l/PoseReader
 
-tags: [bifrost]
+tags: [Bifrost]
 ---
 
 ![barycentric gif](/images/posts/bifrostPoseReader/thumbnail.gif)
