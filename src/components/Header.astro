@@ -27,11 +27,11 @@ import { nav } from '../config';
 </header>
 
 <script is:inline>
-  const currentLocation = location.pathname;
+  const currentPath = location.pathname.replace(/\/+$/, '') || '/';
   const menuItems = document.querySelectorAll("nav a");
   menuItems.forEach(item => {
-    const href = item.getAttribute("href");
-    if (href === "/" ? currentLocation === "/" : currentLocation.startsWith(href)) {
+    const href = item.getAttribute("href").replace(/\/+$/, '') || '/';
+    if (href === "/" ? currentPath === "/" : currentPath.startsWith(href)) {
       item.classList.add("active");
     }
   });
