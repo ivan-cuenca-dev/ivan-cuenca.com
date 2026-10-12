@@ -26,11 +26,12 @@ import { nav } from '../config';
   </div>
 </header>
 
-<script>
+<script is:inline>
   const currentLocation = location.pathname;
   const menuItems = document.querySelectorAll("nav a");
   menuItems.forEach(item => {
-    if (item.getAttribute("href") === currentLocation) {
+    const href = item.getAttribute("href");
+    if (href === "/" ? currentLocation === "/" : currentLocation.startsWith(href)) {
       item.classList.add("active");
     }
   });
